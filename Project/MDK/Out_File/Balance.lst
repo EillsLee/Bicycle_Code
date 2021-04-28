@@ -1,0 +1,37 @@
+C251 COMPILER V5.60.0,  Balance                                                            29/04/21  07:07:03  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE Balance
+OBJECT MODULE PLACED IN .\Out_File\Balance.obj
+COMPILER INVOKED BY: E:\Keil_v5\C251\BIN\C251.EXE ..\USER\src\Balance.c XSMALL INTR2 WARNINGLEVEL(3) BROWSE INCDIR(..\..
+                    -\Libraries\libraries;..\..\Libraries\seekfree_libraries;..\..\Libraries\seekfree_peripheral;..\USER\inc;..\USER\src;..\U
+                    -SER\src\MPU6050_FILE) DEBUG PRINT(.\Out_File\Balance.lst) TABS(2) OBJECT(.\Out_File\Balance.obj) 
+
+stmt  level    source
+
+    1          #include "Balance.h"
+    2          #include "common.h"
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

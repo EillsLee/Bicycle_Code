@@ -1,0 +1,80 @@
+C251 COMPILER V5.60.0,  PID                                                                29/04/21  07:07:03  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE PID
+OBJECT MODULE PLACED IN .\Out_File\PID.obj
+COMPILER INVOKED BY: E:\Keil_v5\C251\BIN\C251.EXE ..\USER\src\PID.c XSMALL INTR2 WARNINGLEVEL(3) BROWSE INCDIR(..\..\Lib
+                    -raries\libraries;..\..\Libraries\seekfree_libraries;..\..\Libraries\seekfree_peripheral;..\USER\inc;..\USER\src;..\USER\
+                    -src\MPU6050_FILE) DEBUG PRINT(.\Out_File\PID.lst) TABS(2) OBJECT(.\Out_File\PID.obj) 
+
+stmt  level    source
+
+    1          #include "headfile.h"
+    2          #include "common.h"
+    3          #include "PID.h"
+    4          struct PID_strc
+    5          {
+    6              float P;
+    7              float I;
+    8              float D;
+    9              float P_out;
+   10              float I_out;
+   11              float D_out;
+   12              float ek, ek1, ek2;
+   13              float OUT_LAST;
+   14              float integral;
+   15          
+   16          }PID;
+   17          
+   18          void Steereo_Ctrl(float deviation)
+   19          {
+   20   1        static float pre_dev;
+   21   1          PID.P = 75.0f;
+   22   1          PID.D = 0.0f;
+   23   1          PID.I = 0.002f;
+   24   1      
+   25   1          PID.integral += deviation;
+   26   1          
+   27   1      
+   28   1          PID.P_out = deviation * PID.P;
+   29   1          PID.D_out = PID.D * (pre_dev - deviation);
+   30   1          PID.I_out = PID.integral *  PID.I;
+   31   1      
+   32   1          PID.OUT_LAST = Stereo_MID + PID.P_out - PID.D_out;//(float)(PID.D_out - PID.P_out)// + PID.I_out);
+   33   1      
+   34   1                  /*******限幅保护*****/
+   35   1                  if(PID.OUT_LAST > 9000)
+   36   1                      PID.OUT_LAST = 9000;
+   37   1                  else if(PID.OUT_LAST < 6000)
+   38   1                      PID.OUT_LAST = 6000;
+   39   1          /*****更新pre_dev*****/
+   40   1        pre_dev = deviation;
+   41   1      
+   42   1          pwm_duty(PWMB_CH1_P74, PID.OUT_LAST);
+   43   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       181     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =        48     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+C251 COMPILER V5.60.0,  PID                                                                29/04/21  07:07:03  PAGE 2   
+
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

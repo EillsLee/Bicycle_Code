@@ -1,0 +1,59 @@
+C251 COMPILER V5.60.0,  main                                                               29/04/21  07:07:03  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE main
+OBJECT MODULE PLACED IN .\Out_File\main.obj
+COMPILER INVOKED BY: E:\Keil_v5\C251\BIN\C251.EXE ..\USER\src\main.c XSMALL INTR2 WARNINGLEVEL(3) BROWSE INCDIR(..\..\Li
+                    -braries\libraries;..\..\Libraries\seekfree_libraries;..\..\Libraries\seekfree_peripheral;..\USER\inc;..\USER\src;..\USER
+                    -\src\MPU6050_FILE) DEBUG PRINT(.\Out_File\main.lst) TABS(2) OBJECT(.\Out_File\main.obj) 
+
+stmt  level    source
+
+    1          #include "headfile.h"
+    2          #include "outputdata.h"
+    3          
+    4          int main(void)    
+    5          {    
+    6   1          DisableGlobalIRQ();    
+    7   1          board_init();//务必保留，本函数用于初始化MPU 时钟 调试串口    
+    8   1      
+    9   1        delay_ms(300);
+   10   1        Init_System(); 
+   11   1          pit_timer_ms(TIM_2, 1);
+   12   1      
+   13   1          delay_ms(50);       //初始化完成后延时一定的时间  
+   14   1          //总中断最后开启    
+   15   1          EnableGlobalIRQ();
+   16   1      
+   17   1          while (1)    
+   18   1      
+   19   1          {           
+   20   2              OutPut_Data(mpu_acc_z, mpu_gyro_y, (int)angle_filted, 0); //发送数据到上位机
+   21   2              delay_ms(5);//延时5ms
+   22   2          }    
+   23   1      
+   24   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        76     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

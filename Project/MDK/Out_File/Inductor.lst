@@ -1,0 +1,48 @@
+C251 COMPILER V5.60.0,  Inductor                                                           29/04/21  07:07:03  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE Inductor
+OBJECT MODULE PLACED IN .\Out_File\Inductor.obj
+COMPILER INVOKED BY: E:\Keil_v5\C251\BIN\C251.EXE ..\USER\src\Inductor.c XSMALL INTR2 WARNINGLEVEL(3) BROWSE INCDIR(..\.
+                    -.\Libraries\libraries;..\..\Libraries\seekfree_libraries;..\..\Libraries\seekfree_peripheral;..\USER\inc;..\USER\src;..\
+                    -USER\src\MPU6050_FILE) DEBUG PRINT(.\Out_File\Inductor.lst) TABS(2) OBJECT(.\Out_File\Inductor.obj) 
+
+stmt  level    source
+
+    1          #include "headfile.h"
+    2          
+    3          void Inductor_init()
+    4          {
+    5   1        adc_init(ADC_P00,ADC_SYSclk_DIV_2);
+    6   1        adc_init(ADC_P01,ADC_SYSclk_DIV_2);
+    7   1        adc_init(ADC_P05,ADC_SYSclk_DIV_2);
+    8   1        adc_init(ADC_P06,ADC_SYSclk_DIV_2);   // ADC channel initialize.
+    9   1      }
+   10          // void Get_Inductor(uint16 Indc_val[])
+   11          // {
+   12          
+   13          // }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        36     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

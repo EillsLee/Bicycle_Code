@@ -1,0 +1,131 @@
+C251 COMPILER V5.60.0,  MPU6050                                                            29/04/21  07:07:03  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE MPU6050
+OBJECT MODULE PLACED IN .\Out_File\MPU6050.obj
+COMPILER INVOKED BY: E:\Keil_v5\C251\BIN\C251.EXE ..\USER\src\MPU6050.c XSMALL INTR2 WARNINGLEVEL(3) BROWSE INCDIR(..\..
+                    -\Libraries\libraries;..\..\Libraries\seekfree_libraries;..\..\Libraries\seekfree_peripheral;..\USER\inc;..\USER\src;..\U
+                    -SER\src\MPU6050_FILE) DEBUG PRINT(.\Out_File\MPU6050.lst) TABS(2) OBJECT(.\Out_File\MPU6050.obj) 
+
+stmt  level    source
+
+    1           #include "common.h"
+    2           #include "MPU6050.h"
+    3           #include "Balance.h"
+    4           #include <math.h>
+    5          
+    6          // char Offset_OK = 0;
+    7          
+    8          // /*
+    9          //  * 函数名：MPU6050_Offset
+   10          //  * 描述  ：传感器采集零偏
+   11          //  * 输入  ：无
+   12          //  * 输出  ：无
+   13          //  * 调用  ：内部调用
+   14          //  */
+   15          // void MPU6050_Offset(void)
+   16          // {
+   17          //  uint8 i = 0;
+   18          //  int32 temp[6] = {0};
+   19            
+   20          //  GYRO_Offset.X = 0;
+   21          //  GYRO_Offset.Y = 0;
+   22          //  GYRO_Offset.Z = 0;
+   23            
+   24          //  for (i = 0; i < 100; i++)
+   25          //  {
+   26          //    MPU6050_GetData(&GYRO, &_ACC);  // 读取陀螺仪数据
+   27          //    DELAY_MS(2);
+   28              
+   29          //    temp[0] += _ACC.X;
+   30          //    temp[1] += _ACC.Y;
+   31          //    temp[2] += _ACC.Z;
+   32              
+   33          //    temp[3] += GYRO.X;
+   34          //    temp[4] += GYRO.Y;
+   35          //    temp[5] += GYRO.Z;
+   36          //  }
+   37          //  ACC_Offset.X = temp[0] / 100;
+   38          //  ACC_Offset.Y = temp[1] / 100;
+   39          //  ACC_Offset.Z = temp[2] / 100;
+   40            
+   41          //  GYRO_Offset.X = temp[3] / 100;
+   42          //  GYRO_Offset.Y = temp[4] / 100;
+   43          //  GYRO_Offset.Z = temp[5] / 100;
+   44            
+   45          //  Offset_OK = 1;
+   46          // }
+   47          
+   48          // /*
+   49          //  * 函数名：MPU6050_GetData
+   50          //  * 描述  ：获得传感器所有数据
+   51          //  * 输入  ：*GYRO 陀螺仪    *_ACC 加速度计
+   52          //  * 输出  ：无
+   53          //  * 调用  ：外部调用
+   54          //  */
+   55          // void MPU6050_GetData(S_INT16_XYZ *GYRO, S_INT16_XYZ *_ACC)
+   56          // {
+   57          //  if (Offset_OK)
+C251 COMPILER V5.60.0,  MPU6050                                                            29/04/21  07:07:03  PAGE 2   
+
+   58          //  {
+   59          //    mpu_acc_x = GetData(MPU_ACCEL_XOUTH_REG); // 获取加速度计原始数据
+   60          //    mpu_acc_y = GetData(MPU_ACCEL_YOUTH_REG);
+   61          //    mpu_acc_z = GetData(MPU_ACCEL_ZOUTH_REG);
+   62              
+   63          //    mpu_gyro_x = GetData(MPU_GYRO_XOUTH_REG) - GYRO_Offset.X; // 获取陀螺仪原始数据
+   64          //    mpu_gyro_y = GetData(MPU_GYRO_YOUTH_REG) - GYRO_Offset.Y;
+   65          //    mpu_gyro_z = GetData(MPU_GYRO_ZOUTH_REG) - GYRO_Offset.Z;
+   66          //  }
+   67          //  else
+   68          //  {
+   69          //    mpu_acc_x = GetData(MPU_ACCEL_XOUTH_REG); // 获取加速度计原始数据并归一化
+   70          //    mpu_acc_y = GetData(MPU_ACCEL_YOUTH_REG);
+   71          //    mpu_acc_z = GetData(MPU_ACCEL_ZOUTH_REG);
+   72              
+   73          //    mpu_gyro_x = GetData(MPU_GYRO_XOUTH_REG); // 获取陀螺仪原始数据并归一化
+   74          //    mpu_gyro_y = GetData(MPU_GYRO_YOUTH_REG);
+   75          //    mpu_gyro_z = GetData(MPU_GYRO_ZOUTH_REG);
+   76          //  }
+   77          // }
+   78          
+   79          // /*
+   80          //  * 函数名：GetData
+   81          //  * 描述  ：获得16位数据
+   82          //  * 输入  ：REG_Address 寄存器地址
+   83          //  * 输出  ：返回寄存器数据
+   84          //  * 调用  ：外部调用
+   85          //  */
+   86          // int16 GetData(uint8 REG_Address)
+   87          // {
+   88          //  uint8 H, L;
+   89          
+   90          //  H = MPU6050_RD(REG_Address);
+   91          //  L = MPU6050_RD(REG_Address+1);
+   92            
+   93          //  return ((H<<8)|L);   //合成数据
+   94          // }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

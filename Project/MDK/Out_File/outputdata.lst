@@ -1,0 +1,99 @@
+C251 COMPILER V5.60.0,  outputdata                                                         29/04/21  07:07:03  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE outputdata
+OBJECT MODULE PLACED IN .\Out_File\outputdata.obj
+COMPILER INVOKED BY: E:\Keil_v5\C251\BIN\C251.EXE ..\USER\src\outputdata.c XSMALL INTR2 WARNINGLEVEL(3) BROWSE INCDIR(..
+                    -\..\Libraries\libraries;..\..\Libraries\seekfree_libraries;..\..\Libraries\seekfree_peripheral;..\USER\inc;..\USER\src;.
+                    -.\USER\src\MPU6050_FILE) DEBUG PRINT(.\Out_File\outputdata.lst) TABS(2) OBJECT(.\Out_File\outputdata.obj) 
+
+stmt  level    source
+
+    1          #include "outputdata.h"
+    2          #include <stdlib.h>
+    3          /*************************使用说明****************************************
+    4          本协议与“Visual Scope”软件协议兼容，用过的可以直接用原来的下位机协议即可
+    5          首次使用时：
+    6          1.将“outputdata.c”和“outputdata.h”添加到你的工程中
+    7          2.在“outputdata.c”中包含你原程序的串口发送函数头文件
+    8          3.将uart_putchar(databuf[i]);语句替换为你的串口字节发送函数，如send_char(databuf[i]);
+    9          4.在你的程序需要发送波形数据的.c文件中添加包含：#include "outputdata.h"，并在本文件中调用函数OutPut_Data(
+             -x,y,z,w);
+   10            其中形参x，y，z，w就是传入四个short int 16位数据，分别对应通道1,2,3,4
+   11          ************************************************************************/
+   12          
+   13          //此处添加你的串口头文件包含！！！！！！！！！！！！
+   14          #include "zf_uart.h"
+   15          
+   16          unsigned short _CRC_CHECK(unsigned char *Buf, unsigned char CRC_CNT)
+   17          {
+   18   1          unsigned short CRC_Temp;
+   19   1          unsigned char i,j;
+   20   1          CRC_Temp = 0xffff;
+   21   1      
+   22   1          for (i=0;i<CRC_CNT; i++){      
+   23   2              CRC_Temp ^= Buf[i];
+   24   2              for (j=0;j<8;j++) {
+   25   3                  if (CRC_Temp & 0x01)
+   26   3                      CRC_Temp = (CRC_Temp >>1 ) ^ 0xa001;
+   27   3                  else
+   28   3                      CRC_Temp = CRC_Temp >> 1;
+   29   3              }
+   30   2          }
+   31   1          return(CRC_Temp);
+   32   1      }
+   33          
+   34          void OutPut_Data(int x,int y,int z,int w)//主程序调用函数
+   35          {
+   36   1        int temp[4] = {0};
+   37   1        unsigned int temp1[4] = {0};
+   38   1        unsigned char databuf[10] = {0};
+   39   1        unsigned char i;
+   40   1        unsigned short _CRC16 = 0;
+   41   1        temp[0]=x;
+   42   1        temp[1]=y;
+   43   1        temp[2]=z;
+   44   1        temp[3]=w;
+   45   1        for(i=0;i<4;i++)
+   46   1          temp1[i] = (unsigned int)temp[i];
+   47   1         
+   48   1        for(i=0;i<4;i++) 
+   49   1        {
+   50   2          databuf[i<<1]   = (unsigned char)(temp1[i]&0xff);
+   51   2          databuf[(i<<1)+1] = (unsigned char)((temp1[i]&0xff00)>>8);
+   52   2        }
+   53   1        
+   54   1        _CRC16 = _CRC_CHECK(databuf,8);
+   55   1        databuf[8] = _CRC16&0xff;
+   56   1        databuf[9] =(_CRC16&0xff00)>>8;
+C251 COMPILER V5.60.0,  outputdata                                                         29/04/21  07:07:03  PAGE 2   
+
+   57   1        
+   58   1        for(i=0;i<10;i++)
+   59   1          uart_putchar(UART_1,databuf[i]);//需要修改的串口字节发送函数！！！！！！！！！！！
+   60   1      }
+*** WARNING C183 IN LINE 40 OF ..\USER\src\outputdata.c: dead assignment eliminated
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       257     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------         26
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        26     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
